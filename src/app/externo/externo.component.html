@@ -1,10 +1,19 @@
-<p>{{fecha | date: 'dd/MM/yy'}}</p>
-<hr>
-<br>
-{{4 | calculadora: 2}}
-<input type="text">
+<h2>Enviar Usuarios</h2>
 
+<form #newUser="ngForm" (ngSubmit)="onSubmit(newUser)">
+    <label for="name">nombre</label>
+    <input type="text" name="name" id="" #name="ngModel" [(ngModel)]="new_user.name" required>
 
-<div *ngIf="user">
-    <h2>{{user.first_name}}</h2>
+    <span *ngIf="name.touched && !name.valid">El nombre no es valido</span>
+    <label for="job">job</label>
+    <input type="text" name="job" id="" #job="ngModel" [(ngModel)]="new_user.job" required>
+    <span *ngIf="job.touched && !job.valid">El job no es valido</span>
+
+    <input type="submit" value="guardar usuario" [disabled]="!newUser.form.valid">
+</form>
+
+<div *ngIf="usuariosSaved">
+    <h2>{{usuariosSaved.name}}</h2>
+    <h2>{{usuariosSaved.job}}</h2>
+
 </div>
